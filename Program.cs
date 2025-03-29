@@ -7,25 +7,27 @@ petData[1] = GetInput("Raça (se desconhecida, digite INDEFINIDA): ");
 petData[2] = GetInput("Alcunha (nome do pet): ");
 petData[3] = GetAgeInput("Idade (em anos): ");
 petData[4] = GetInput("Cor (pelagem do pet): ");
-
+Console.Clear();
+DisplayHeader();
 Pet newPet = new Pet(petData[0], petData[1], petData[2], int.Parse(petData[3]), petData[4]);
 newPet.ShowPet();
 static void DisplayHeader()
 {
+    Console.ForegroundColor = ConsoleColor.DarkGray;
     Console.WriteLine("+=========================================================+");
+    Console.Write("|                 ");
     Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.WriteLine("|                 Pet Hotel \"Nem um pio\"                  |");
-    Console.ResetColor();
+    Console.Write("Pet Hotel \"Nem um pio\"");
+    Console.ForegroundColor = ConsoleColor.DarkGray;
+    Console.WriteLine("                  |");
     Console.WriteLine("+=========================================================+");
+    Console.ResetColor();
 }
-
 static string GetInput(string prompt)
 {
     string input;
     do
     {
-        Console.Clear();
-        DisplayHeader();
         Console.Write(prompt);
         input = Console.ReadLine()!;
         if (string.IsNullOrWhiteSpace(input))
@@ -42,8 +44,6 @@ static string GetAgeInput(string prompt)
     string input;
     do
     {
-        Console.Clear();
-        DisplayHeader();
         Console.Write(prompt);
         input = Console.ReadLine()!;
         if (string.IsNullOrWhiteSpace(input) || !int.TryParse(input, out _))
@@ -73,15 +73,42 @@ public class Pet
 
     public void ShowPet()
     {
+        Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine("+=========================================================+");
+
+        Console.Write("| Espécie: ");
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine($"| Espécie: {Species.PadLeft(15, '.')} | Raça: {Breed.PadLeft(15, '.')} |");
-        Console.ResetColor();
-        Console.WriteLine("+=========================================================+");
+        Console.Write($"{Species.Trim().ToUpper().PadLeft(15, '.').Substring(0, 15)}");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write(" | Raça: ");
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine($"| Atende pela alcunha {Nickname.PadLeft(30, '.')} |");
-        Console.WriteLine($"| Idade: {Age.ToString().PadLeft(15, '.')} ano(s) | Pelagem/cor: {Color.PadLeft(15, '.')} |");
-        Console.ResetColor();
+        Console.Write($"{Breed.Trim().ToUpper().PadLeft(22, '.').Substring(0, 22)}");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(" |");
+
+        Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine("+=========================================================+");
+
+        Console.Write("| Atende pela alcunha de: ");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write($"{Nickname.Trim().ToUpper().PadLeft(31, '.').Substring(0, 31)}");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(" |");
+
+        Console.Write("| Idade: ");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write($"{Age.ToString().Trim().ToUpper().PadLeft(2, '0').Substring(0, 2)} ano(s)");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write(" | Pelagem/cor: ");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write($"{Color.Trim().ToUpper().PadLeft(23, '.').Substring(0, 23)}");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(" |");
+
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("+=========================================================+");
+
+        Console.ResetColor();
     }
+
 }
