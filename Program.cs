@@ -74,7 +74,6 @@ public class Pet
     public void ShowPet()
     {
         Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine("+=========================================================+");
 
         Console.Write("| Espécie: ");
         Console.ForegroundColor = ConsoleColor.Blue;
